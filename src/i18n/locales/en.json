@@ -1,0 +1,222 @@
+{
+  "brand": "BuildingFex",
+  "a11y": {
+    "skipToContent": "Skip to main content"
+  },
+  "nav": {
+    "home": "Home",
+    "subscriptions": "Subscriptions",
+    "productVideo": "Product video",
+    "teamVideo": "Team video",
+    "benefits": "Benefits",
+    "contact": "Contact"
+  },
+  "header": {
+    "start": "Open web app",
+    "navAria": "Primary"
+  },
+  "hero": {
+    "watermark": "BUILDING",
+    "beta": "BETA",
+    "eyebrow": "FOR BUILDINGS & CONDOMINIUMS",
+    "title": "Operations for condominiums and residential towers—one platform.",
+    "lead": "BuildingFex helps boards and property managers run common areas, collections, maintenance, and communications with the same experience on this site and in the web application.",
+    "logoPrimary": "Building",
+    "logoAccent": "Fex",
+    "ctaPrimary": "Open the web application",
+    "columnTitle": "What BuildingFex covers",
+    "cards": [
+      {
+        "title": "Common areas",
+        "text": "Bookings, rules, and upkeep in one view."
+      },
+      {
+        "title": "Collections",
+        "text": "Fees, reminders, and payment visibility for owners."
+      },
+      {
+        "title": "Maintenance",
+        "text": "Requests, vendors, and status for the whole building."
+      },
+      {
+        "title": "Announcements",
+        "text": "Official notices to residents and committees."
+      },
+      {
+        "title": "Access & visitors",
+        "text": "Registers aligned with building policies."
+      },
+      {
+        "title": "Documents",
+        "text": "Minutes, regulations, and files for the community."
+      }
+    ]
+  },
+  "subscriptions": {
+    "heading": "Subscriptions",
+    "perMonth": "per month",
+    "priceFmt": "S/ {price} per month (PEN).",
+    "priceAria": "{amount} soles per month",
+    "ctaLabel": "Subscribe",
+    "ctaDisabledHint": "Set VITE_WEB_APP_URL in your environment to enable this link.",
+    "plans": [
+      {
+        "id": "u10-15",
+        "name": "Essential",
+        "range": "10–15 apartments",
+        "price": "40",
+        "highlight": "Billed monthly in Peruvian soles (PEN).",
+        "features": [
+          "Built for smaller buildings and boutique condominiums.",
+          "Common areas, collections, and announcements in one place.",
+          "Documents and visitor logs for your community.",
+          "Web console for administrators and boards.",
+          "Email support on business days."
+        ],
+        "path": "/app/subscribe?plan=10-15"
+      },
+      {
+        "id": "u16-40",
+        "name": "Standard",
+        "range": "16–40 apartments",
+        "price": "80",
+        "highlight": "Billed monthly in PEN. Covers up to 40 units.",
+        "features": [
+          "Designed for mid-size towers and active communities.",
+          "Same capabilities as Essential with higher capacity.",
+          "Clearer visibility into fees and delinquency.",
+          "Broadcast updates to residents and committees.",
+          "Priority operational support."
+        ],
+        "path": "/app/subscribe?plan=16-40"
+      },
+      {
+        "id": "u41-80",
+        "name": "Scale",
+        "range": "41–80 apartments",
+        "price": "120",
+        "highlight": "Billed monthly in PEN. Tier set to avoid overlap with 16–40.",
+        "features": [
+          "Large compounds and high-rise portfolios.",
+          "Performance and limits matched to building size.",
+          "Reporting for larger boards and committees.",
+          "Help rolling out and onboarding your team.",
+          "Support channel with agreed response times."
+        ],
+        "path": "/app/subscribe?plan=41-80"
+      }
+    ]
+  },
+  "videos": {
+    "product": {
+      "title": "About the product",
+      "placeholder": "YouTube video not configured yet. Add the ID to your environment and redeploy.",
+      "embedAria": "About the product video",
+      "iframeTitle": "BuildingFex product overview on YouTube"
+    },
+    "team": {
+      "title": "About the team",
+      "placeholder": "Team video not configured yet. Paste the YouTube video ID later.",
+      "embedAria": "About the team video",
+      "iframeTitle": "BuildingFex team and process on YouTube"
+    }
+  },
+  "features": {
+    "heading": "Why property managers choose BuildingFex",
+    "sub": "Clear workflows for boards, administrators, and residents—aligned with professional ethics and transparent terms.",
+    "items": [
+      {
+        "icon": "pi-desktop",
+        "title": "One experience",
+        "text": "Same look and flows on this landing page and inside the web application."
+      },
+      {
+        "icon": "pi-shield",
+        "title": "Responsible delivery",
+        "text": "Engineering guided by ACM/IEEE ethics and clear terms of service for communities."
+      },
+      {
+        "icon": "pi-chart-line",
+        "title": "Ready to scale",
+        "text": "Responsive design, English and Latin American Spanish (es-419), and accessible defaults."
+      }
+    ]
+  },
+  "cta": {
+    "heroTitle": "How can we help you?",
+    "searchPlaceholder": "Search",
+    "searchAria": "Search frequently asked questions",
+    "faqTitle": "Frequently asked questions",
+    "supportBefore": "Didn’t find what you need? Open your profile, go to ",
+    "supportBold": "Support",
+    "supportAfter": ", and submit a ticket—we’ll reply there.",
+    "searchEmpty": "No results match your search.",
+    "faqItems": [
+      {
+        "question": "What is BuildingFex?",
+        "answer": "A platform to run condominiums and residential buildings—common areas, collections, maintenance, and resident communications—with the same experience on this site and in the web app."
+      },
+      {
+        "question": "How do I pick a subscription plan?",
+        "answer": "Choose based on how many apartments your building has. Amounts are in Peruvian soles (PEN) and billing is monthly. If you’re unsure at a range boundary, contact us via Support."
+      },
+      {
+        "question": "How do I contact the team?",
+        "answer": "Email hola@ejemplo.com or open a ticket from Support in your profile once you have access to the application."
+      },
+      {
+        "question": "Where are the product and team videos?",
+        "answer": "This landing includes dedicated sections below. If they don’t load, the YouTube IDs may still need to be set in your deployment environment."
+      },
+      {
+        "question": "Is my data protected?",
+        "answer": "We follow solid security practices and clear terms. Legal details are in the terms of service linked in the footer."
+      }
+    ]
+  },
+  "footer": {
+    "copy": "© {year} BuildingFex. All rights reserved.",
+    "top": "Back to top",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "legalNavAria": "Legal",
+    "developedBy": "Developed by",
+    "developerName": "BuildingFex",
+    "developerBadgeAria": "BuildingFex (opens in a new tab)",
+    "termsAria": "Terms of service (opens on this site)"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "lead": "This page is a placeholder. Replace with your privacy policy before production."
+  },
+  "terms": {
+    "title": "Terms of service",
+    "updated": "Last updated: April 2026. Placeholder document for coursework; replace with counsel-reviewed text before production.",
+    "sections": [
+      {
+        "title": "1. Purpose and ethics",
+        "body": "BuildingFex provides digital services under principles aligned with the ACM Code of Ethics and Professional Conduct and the IEEE Code of Ethics: honesty, fairness, privacy, and competence. We commit to disclose limitations of our software and to prioritize user safety and data stewardship."
+      },
+      {
+        "title": "2. Acceptable use",
+        "body": "You agree not to misuse the platform—including attempting unauthorized access, interfering with other users, or using the service to violate applicable law. Educational institutions remain responsible for compliance with local regulations (FERPA, GDPR analogues, etc.) where they apply."
+      },
+      {
+        "title": "3. Accounts and access",
+        "body": "Access to the web application may require credentials issued by BuildingFex or your institution. You are responsible for safeguarding credentials and for activity under your account."
+      },
+      {
+        "title": "4. Intellectual property",
+        "body": "The BuildingFex name, visual identity, and software are protected. Unless expressly permitted, you may not copy, modify, or redistribute our materials outside the scope of your license or institutional agreement."
+      },
+      {
+        "title": "5. Disclaimers",
+        "body": "Services are provided “as is” to the extent permitted by law. BuildingFex does not guarantee uninterrupted availability. Nothing in these terms constitutes legal or professional advice; institutions should obtain independent counsel for contractual matters."
+      },
+      {
+        "title": "6. Contact",
+        "body": "For questions about these terms, contact the BuildingFex team using the email provided in the contact section of this landing page."
+      }
+    ]
+  }
+}
