@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { YOUTUBE_PRODUCT_ID, YOUTUBE_TEAM_ID } from '../config.js'
+import { YOUTUBE_PRODUCT_ID, YOUTUBE_TEAM_ID } from '@/marketing/infrastructure/envConfig.js'
 
 const props = defineProps({
   videoKey: {

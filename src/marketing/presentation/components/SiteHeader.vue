@@ -4,7 +4,8 @@ import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import LocaleSwitcher from './LocaleSwitcher.vue'
-import { webAppUrl } from '../config.js'
+import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
+import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -21,7 +22,7 @@ const nav = computed(() => [
 const appEntry = computed(() => webAppUrl('/app'))
 
 function navLinkIsActive(hash) {
-  if (route.path !== '/') return false
+  if (route.name !== MarketingRouteNames.HOME) return false
   if (hash === '#inicio') return route.hash === '' || route.hash === '#inicio'
   return route.hash === hash
 }
@@ -31,7 +32,7 @@ function navLinkIsActive(hash) {
   <header class="header" role="banner">
     <div class="header__wrap">
       <div class="header__bar">
-        <router-link class="brand" to="/">
+        <router-link class="brand" :to="{ name: MarketingRouteNames.HOME }">
           <img
             src="/logo-buildingfex.png"
             :alt="t('brand')"
@@ -47,7 +48,7 @@ function navLinkIsActive(hash) {
             :key="item.hash"
             class="nav__link"
             :class="{ 'nav__link--active': navLinkIsActive(item.hash) }"
-            :to="{ path: '/', hash: item.hash }"
+            :to="{ name: MarketingRouteNames.HOME, hash: item.hash }"
             :aria-current="navLinkIsActive(item.hash) ? 'page' : undefined"
           >
             {{ item.label }}

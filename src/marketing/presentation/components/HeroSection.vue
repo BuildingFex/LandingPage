@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
-import { webAppUrl } from '../config.js'
+import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
 
 const { t } = useI18n()
 

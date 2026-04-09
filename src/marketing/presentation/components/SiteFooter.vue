@@ -1,6 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { DEVELOPER_URL } from '../config.js'
+import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
+import { DEVELOPER_URL } from '@/marketing/infrastructure/envConfig.js'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
@@ -12,9 +13,9 @@ const year = new Date().getFullYear()
       <strong class="footer__brand">{{ t('brand') }}</strong>
 
       <nav class="footer__legal" :aria-label="t('footer.legalNavAria')">
-        <router-link to="/privacy" class="footer__link">{{ t('footer.privacy') }}</router-link>
+        <router-link :to="{ name: MarketingRouteNames.PRIVACY }" class="footer__link">{{ t('footer.privacy') }}</router-link>
         <span class="footer__dot" aria-hidden="true">·</span>
-        <router-link to="/terms" class="footer__link">{{ t('footer.terms') }}</router-link>
+        <router-link :to="{ name: MarketingRouteNames.TERMS }" class="footer__link">{{ t('footer.terms') }}</router-link>
       </nav>
 
       <div class="footer__credit">

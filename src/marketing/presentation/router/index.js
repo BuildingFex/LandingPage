@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { MarketingPaths, MarketingRouteNames } from '../../domain/marketingRoutes.js'
 import LandingView from '../views/LandingView.vue'
 import TermsView from '../views/TermsView.vue'
 import PrivacyView from '../views/PrivacyView.vue'
@@ -6,9 +7,9 @@ import PrivacyView from '../views/PrivacyView.vue'
 export default createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'home', component: LandingView },
-    { path: '/terms', name: 'terms', component: TermsView },
-    { path: '/privacy', name: 'privacy', component: PrivacyView },
+    { path: MarketingPaths.HOME, name: MarketingRouteNames.HOME, component: LandingView },
+    { path: MarketingPaths.TERMS, name: MarketingRouteNames.TERMS, component: TermsView },
+    { path: MarketingPaths.PRIVACY, name: MarketingRouteNames.PRIVACY, component: PrivacyView },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) return savedPosition
