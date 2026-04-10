@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
 import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
@@ -7,58 +7,53 @@ import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
 const { t } = useI18n()
 
 const appEntry = computed(() => webAppUrl('/app'))
+
+const heroRevealed = ref(false)
+onMounted(() => {
+  requestAnimationFrame(() => {
+    heroRevealed.value = true
+  })
+})
 </script>
 
 <template>
-  <section id="inicio" class="hero">
+  <section id="inicio" class="hero" :class="{ 'hero--revealed': heroRevealed }">
     <div class="hero__media" aria-hidden="true">
       <div class="hero__bg" />
       <div class="hero__overlay" />
+      <div class="hero__top-shade" />
     </div>
-
-    <p class="hero__watermark" aria-hidden="true">{{ t('hero.watermark') }}</p>
-
-    <span class="hero__beta">{{ t('hero.beta') }}</span>
 
     <div class="hero__layout">
       <div class="hero__content">
-        <div class="hero__logo-wrap">
-          <img
-            src="/logo-buildingfex.png"
-            :alt="t('brand')"
-            class="hero__logo-img"
-            width="240"
-            height="52"
-            decoding="async"
+        <p class="hero__eyebrow hero__reveal" style="--reveal-i: 0">{{ t('hero.eyebrow') }}</p>
+        <h1 class="hero__title hero__reveal--title" style="--reveal-i: 1">{{ t('hero.title') }}</h1>
+        <p class="hero__lead hero__reveal" style="--reveal-i: 2">{{ t('hero.lead') }}</p>
+
+        <div class="hero__reveal" style="--reveal-i: 3">
+          <Button
+            v-if="appEntry"
+            class="hero__cta"
+            :label="t('hero.ctaPrimary')"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            rounded
+            as="a"
+            :href="appEntry"
+            severity="info"
+          />
+          <Button
+            v-else
+            class="hero__cta"
+            :label="t('hero.ctaPrimary')"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            rounded
+            as="a"
+            href="/#contacto"
+            severity="info"
           />
         </div>
-
-        <p class="hero__eyebrow">{{ t('hero.eyebrow') }}</p>
-        <h1 class="hero__title">{{ t('hero.title') }}</h1>
-        <p class="hero__lead">{{ t('hero.lead') }}</p>
-
-        <Button
-          v-if="appEntry"
-          class="hero__cta"
-          :label="t('hero.ctaPrimary')"
-          icon="pi pi-arrow-right"
-          iconPos="right"
-          rounded
-          as="a"
-          :href="appEntry"
-          severity="info"
-        />
-        <Button
-          v-else
-          class="hero__cta"
-          :label="t('hero.ctaPrimary')"
-          icon="pi pi-arrow-right"
-          iconPos="right"
-          rounded
-          as="a"
-          href="/#contacto"
-          severity="info"
-        />
       </div>
     </div>
   </section>
@@ -70,8 +65,6 @@ const appEntry = computed(() => webAppUrl('/app'))
   --hero-fg: #f5f5f7;
   --hero-fg-muted: rgba(245, 245, 247, 0.72);
   --hero-fg-eyebrow: rgba(245, 245, 247, 0.58);
-  --hero-glass: rgba(255, 255, 255, 0.14);
-  --hero-glass-border: rgba(255, 255, 255, 0.22);
   /* CTA solo en hero: píldora clara sobre imagen oscura */
   --hero-cta-bg: #f5f5f7;
   --hero-cta-bg-hover: #ffffff;
@@ -85,6 +78,7 @@ const appEntry = computed(() => webAppUrl('/app'))
   justify-content: flex-end;
   padding: 0;
   margin: 0;
+  /* El header es fixed: el hero empieza arriba del todo y el fondo queda detrás del header */
   overflow: hidden;
   font-family: var(--apple-font);
   -webkit-font-smoothing: antialiased;
@@ -121,39 +115,22 @@ const appEntry = computed(() => webAppUrl('/app'))
     linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.22) 52%, rgba(0, 0, 0, 0.04) 100%);
 }
 
-.hero__watermark {
+/* Cinta de sombra bajo el header (degradado negro suave hacia abajo) */
+.hero__top-shade {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -52%);
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1;
-  margin: 0;
-  font-size: clamp(3.5rem, 18vw, 14rem);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.065);
-  white-space: nowrap;
+  height: min(42vh, 220px);
   pointer-events: none;
-  user-select: none;
-}
-
-.hero__beta {
-  position: absolute;
-  top: max(1rem, env(safe-area-inset-top));
-  right: max(1rem, env(safe-area-inset-right));
-  z-index: 3;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--hero-fg);
-  background: var(--hero-glass);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--apple-radius-pill);
-  border: 1px solid var(--hero-glass-border);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.38) 38%,
+    rgba(0, 0, 0, 0.12) 68%,
+    transparent 100%
+  );
 }
 
 .hero__layout {
@@ -162,13 +139,14 @@ const appEntry = computed(() => webAppUrl('/app'))
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 6rem max(1.25rem, env(safe-area-inset-right)) 2.75rem max(1.25rem, env(safe-area-inset-left));
+  padding: calc(env(safe-area-inset-top, 0px) + var(--landing-header-height, 4rem) + 3.5rem)
+    max(1.25rem, env(safe-area-inset-right)) 2.75rem max(1.25rem, env(safe-area-inset-left));
 }
 
 @media (min-width: 900px) {
   .hero__layout {
     padding-bottom: 3rem;
-    padding-top: 7rem;
+    padding-top: calc(env(safe-area-inset-top, 0px) + var(--landing-header-height, 4rem) + 4.5rem);
   }
 }
 
@@ -176,27 +154,33 @@ const appEntry = computed(() => webAppUrl('/app'))
   max-width: 38rem;
 }
 
-.hero__logo-wrap {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.55rem 0.85rem;
-  margin-bottom: 1.35rem;
-  background: rgba(251, 251, 253, 0.92);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-radius: var(--apple-radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: var(--apple-shadow-md);
+.hero__reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
 }
 
-.hero__logo-img {
-  display: block;
-  width: auto;
-  max-width: min(220px, 72vw);
-  height: auto;
-  max-height: 44px;
-  object-fit: contain;
-  object-position: left center;
+.hero--revealed .hero__reveal {
+  animation: lp-rise-block 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--reveal-i, 0) * 0.075s);
+}
+
+.hero__reveal--title {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+}
+
+.hero--revealed .hero__reveal--title {
+  animation: lp-rise-title 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--reveal-i, 0) * 0.075s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__reveal,
+  .hero__reveal--title {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .hero__eyebrow {
@@ -243,6 +227,7 @@ const appEntry = computed(() => webAppUrl('/app'))
   line-height: 1.17647;
   padding: 0.7rem 1.45rem !important;
   border-radius: var(--apple-radius-pill) !important;
+  overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
   transition:
     transform 0.2s ease,
@@ -272,7 +257,7 @@ const appEntry = computed(() => webAppUrl('/app'))
   }
 
   .hero__layout {
-    padding-top: 4.75rem;
+    padding-top: calc(env(safe-area-inset-top, 0px) + var(--landing-header-height, 4rem) + 3.25rem);
     padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
 

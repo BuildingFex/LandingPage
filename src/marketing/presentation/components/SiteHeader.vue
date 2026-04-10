@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
@@ -9,6 +9,30 @@ import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
 
 const { t } = useI18n()
 const route = useRoute()
+
+/** Pixels scrolled before the bar turns solid (home only). */
+const SCROLL_SOLID_THRESHOLD = 16
+
+const scrollY = ref(0)
+
+const isHeaderTransparent = computed(() => {
+  const onHome =
+    route.name === MarketingRouteNames.HOME || route.path === '/' || route.path === ''
+  return onHome && scrollY.value <= SCROLL_SOLID_THRESHOLD
+})
+
+function updateScroll() {
+  scrollY.value = window.scrollY || 0
+}
+
+onMounted(() => {
+  updateScroll()
+  window.addEventListener('scroll', updateScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateScroll)
+})
 
 const nav = computed(() => [
   { hash: '#inicio', label: t('nav.home') },
@@ -29,7 +53,7 @@ function navLinkIsActive(hash) {
 </script>
 
 <template>
-  <header class="header" role="banner">
+  <header class="header" :class="{ 'header--transparent': isHeaderTransparent }" role="banner">
     <div class="header__wrap">
       <div class="header__bar">
         <router-link class="brand" :to="{ name: MarketingRouteNames.HOME }">
@@ -61,6 +85,7 @@ function navLinkIsActive(hash) {
           as="a"
           :href="appEntry"
           outlined
+          rounded
           severity="secondary"
           size="small"
           class="header-cta"
@@ -71,6 +96,7 @@ function navLinkIsActive(hash) {
           as="a"
           href="/#contacto"
           outlined
+          rounded
           severity="secondary"
           size="small"
           class="header-cta"
@@ -82,8 +108,10 @@ function navLinkIsActive(hash) {
 
 <style scoped>
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   width: 100%;
   padding: 0;
@@ -95,12 +123,18 @@ function navLinkIsActive(hash) {
   color: var(--apple-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.header--transparent {
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .header__wrap {
   width: 100%;
   max-width: none;
   margin: 0;
+  background: transparent;
 }
 
 .header__bar {
@@ -117,6 +151,20 @@ function navLinkIsActive(hash) {
   background: var(--apple-bg);
   border-bottom: 1px solid var(--apple-border);
   box-shadow: var(--apple-shadow-sm);
+  transition:
+    background 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+    border-color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.header--transparent .header__bar {
+  background: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.header--transparent {
+  background: transparent !important;
 }
 
 @media (min-width: 900px) {
@@ -167,6 +215,11 @@ function navLinkIsActive(hash) {
   padding-top: 0.5rem;
   margin-top: 0.15rem;
   border-top: 1px solid var(--apple-border-hairline);
+  transition: border-color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.header--transparent .nav {
+  border-top-color: transparent;
 }
 
 .nav__link {
@@ -174,12 +227,23 @@ function navLinkIsActive(hash) {
   padding: 0.35rem 0.5rem;
   border-radius: var(--apple-radius-pill);
   line-height: var(--apple-header-nav-leading);
-  transition: color 0.2s ease, background 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.header--transparent .nav__link {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .nav__link:hover {
   color: var(--apple-text);
   background: rgba(0, 0, 0, 0.04);
+}
+
+.header--transparent .nav__link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav__link:focus-visible {
@@ -193,8 +257,17 @@ function navLinkIsActive(hash) {
   background: rgba(0, 0, 0, 0.05);
 }
 
+.header--transparent .nav__link--active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
 .nav__link--active:hover {
   background: rgba(0, 0, 0, 0.07);
+}
+
+.header--transparent .nav__link--active:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 @media (max-width: 899px) {
@@ -218,14 +291,18 @@ function navLinkIsActive(hash) {
   flex-shrink: 0;
 }
 
-.header-cta :deep(.p-button) {
+/* `header-cta` va en la raíz del Button (mismo nodo que .p-button), no es padre del botón */
+.header-cta.p-button {
+  /* Apple-style capsule: full pill + clip contents (PrimeVue outline + ripple) */
   border-radius: var(--apple-radius-pill) !important;
+  overflow: hidden;
   font-family: var(--apple-font) !important;
   font-weight: var(--apple-header-cta-weight) !important;
   font-size: var(--apple-header-cta-size) !important;
   letter-spacing: var(--apple-header-nav-tracking) !important;
   line-height: var(--apple-header-nav-leading) !important;
-  padding: 0.45rem 1rem !important;
+  padding: 0.45rem 1.1rem !important;
+  min-height: 2rem;
   border-color: var(--apple-border-hairline) !important;
   color: var(--apple-text) !important;
   background: rgba(255, 255, 255, 0.92) !important;
@@ -236,15 +313,92 @@ function navLinkIsActive(hash) {
     border-color 0.2s ease;
 }
 
-.header-cta :deep(.p-button:hover) {
+.header-cta.p-button :deep(.p-button-label) {
+  border-radius: inherit;
+}
+
+.header-cta.p-button:hover {
   background: #ffffff !important;
   border-color: var(--apple-border-hairline) !important;
   box-shadow: var(--apple-shadow-sm);
 }
 
-.header-cta :deep(.p-button:focus-visible) {
+.header-cta.p-button:focus-visible {
   outline: var(--apple-focus-ring);
   outline-offset: var(--apple-focus-ring-offset);
+}
+
+.header--transparent :deep(.locale-switcher) {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.header--transparent :deep(.locale-switcher__btn) {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.header--transparent :deep(.locale-switcher__btn:hover:not(.locale-switcher__btn--active)) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.header--transparent :deep(.locale-switcher__btn--active) {
+  color: var(--apple-text);
+  background: #ffffff;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 0 0 0.5px rgba(0, 0, 0, 0.06);
+}
+
+/* Mismo nodo: .header-cta.p-button — texto blanco sobre hero (gana a tema outlined secondary) */
+.header--transparent .header-cta.p-button.p-button-outlined.p-button-secondary {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.header--transparent
+  .header-cta.p-button.p-button-outlined.p-button-secondary
+  :deep(.p-button-label),
+.header--transparent
+  .header-cta.p-button.p-button-outlined.p-button-secondary
+  :deep(.p-button-icon) {
+  color: #ffffff !important;
+}
+
+.header--transparent .header-cta.p-button.p-button-outlined.p-button-secondary:not(:disabled):hover,
+.header--transparent .header-cta.p-button.p-button-outlined.p-button-secondary:not(:disabled):active {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: #ffffff !important;
+}
+
+.header--transparent
+  .header-cta.p-button.p-button-outlined.p-button-secondary:not(:disabled):hover
+  :deep(.p-button-label),
+.header--transparent
+  .header-cta.p-button.p-button-outlined.p-button-secondary:not(:disabled):active
+  :deep(.p-button-label) {
+  color: #ffffff !important;
+}
+
+.header--transparent .header-cta.p-button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+/* Logo: sin invert (rompe muchos PNG); chip claro para que el asset original se lea sobre el hero */
+.header--transparent .brand {
+  padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.header--transparent .brand__img {
+  display: block;
+  filter: none;
 }
 
 @media (min-width: 900px) {

@@ -2,14 +2,25 @@
 import { useI18n } from 'vue-i18n'
 import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
 import { DEVELOPER_URL } from '@/marketing/infrastructure/envConfig.js'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
+
+const { targetRef: footerRevealRoot, isVisible: footerRevealVisible } = useScrollReveal({
+  rootMargin: '0px 0px -6% 0px',
+  once: true,
+})
 </script>
 
 <template>
-  <footer class="footer" role="contentinfo">
-    <div class="footer__shell">
+  <footer
+    ref="footerRevealRoot"
+    class="footer"
+    :class="{ 'footer--revealed': footerRevealVisible }"
+    role="contentinfo"
+  >
+    <div class="footer__shell footer__reveal">
       <strong class="footer__brand">{{ t('brand') }}</strong>
 
       <nav class="footer__legal" :aria-label="t('footer.legalNavAria')">
@@ -50,6 +61,15 @@ const year = new Date().getFullYear()
   border-top: 1px solid var(--apple-border-hairline);
   font-family: var(--apple-font);
   -webkit-font-smoothing: antialiased;
+}
+
+.footer__reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+
+.footer--revealed .footer__reveal {
+  animation: lp-rise-soft 0.88s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .footer__shell {
@@ -178,6 +198,14 @@ const year = new Date().getFullYear()
   .footer__copy {
     text-align: right;
     flex: 0 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 </style>

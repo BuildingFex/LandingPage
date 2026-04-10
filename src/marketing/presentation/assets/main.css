@@ -46,6 +46,9 @@
   --apple-focus-ring: 2px solid var(--apple-blue);
   --apple-focus-ring-offset: 2px;
 
+  /* Altura reservada al header fijo (barra + nav en móvil) — padding del hero y scroll-margin de anclas */
+  --landing-header-height: 4rem;
+
   /* Aliases used across Vue components */
   --bg: var(--apple-bg);
   --bg-elevated: var(--apple-bg-secondary);
@@ -59,6 +62,17 @@
 
   font-family: var(--apple-font);
   color-scheme: light;
+}
+
+@media (max-width: 899px) {
+  :root {
+    --landing-header-height: 7.5rem;
+  }
+}
+
+/* Anclas: el contenido no queda bajo el header fijo */
+:where(section[id], main[id]) {
+  scroll-margin-top: calc(var(--landing-header-height) + 0.35rem);
 }
 
 .md-elevation-1 {
@@ -99,4 +113,53 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* ── Landing: shared entrance motion (fade + rise, WhatsApp-style easing) ── */
+@keyframes lp-rise-title {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lp-rise-block {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lp-rise-card {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 48px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes lp-rise-soft {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }

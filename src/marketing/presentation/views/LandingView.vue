@@ -34,7 +34,7 @@ import SiteFooter from '../components/SiteFooter.vue'
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  overflow-x: hidden;
+  /* overflow-x en el header fijo rompe sticky; el recorte horizontal ya está en html/body */
   width: 100%;
 }
 

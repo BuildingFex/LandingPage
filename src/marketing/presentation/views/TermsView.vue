@@ -47,7 +47,7 @@ const sections = computed(() => tm('terms.sections'))
   flex: 1;
   background: var(--apple-bg);
   color: var(--apple-text);
-  padding: 2.5rem 1.25rem 3.5rem;
+  padding: calc(env(safe-area-inset-top, 0px) + var(--landing-header-height) + 1.25rem) 1.25rem 3.5rem;
 }
 
 .terms-article {

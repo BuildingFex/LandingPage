@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { YOUTUBE_PRODUCT_ID, YOUTUBE_TEAM_ID } from '@/marketing/infrastructure/envConfig.js'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
 const props = defineProps({
   videoKey: {
@@ -29,16 +30,23 @@ const embedSrc = computed(() =>
 
 const titleId = computed(() => `video-title-${props.videoKey}`)
 
-const sectionClass = computed(() => [
-  'video-section',
-  props.variant === 'muted' && 'video-section--muted',
-])
+const sectionClass = computed(() => {
+  const c = ['video-section']
+  if (props.variant === 'muted') c.push('video-section--muted')
+  return c
+})
+
+const { targetRef: videoRevealRoot, isVisible: videoRevealVisible } = useScrollReveal({
+  rootMargin: '0px 0px -8% 0px',
+  once: true,
+})
 </script>
 
 <template>
   <section
+    ref="videoRevealRoot"
     :id="videoKey === 'product' ? 'video-product' : 'video-team'"
-    :class="sectionClass"
+    :class="[...sectionClass, { 'video-section--revealed': videoRevealVisible }]"
     :aria-labelledby="titleId"
   >
     <div class="video-section__inner">
@@ -97,6 +105,12 @@ const sectionClass = computed(() => [
   letter-spacing: -0.03em;
   line-height: 1.07;
   color: var(--apple-text);
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.video-section--revealed .video-section__title {
+  animation: lp-rise-title 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .video-section__frame {
@@ -107,6 +121,13 @@ const sectionClass = computed(() => [
   border: 1px solid var(--apple-border);
   box-shadow: var(--apple-shadow-sm);
   aspect-ratio: 16 / 9;
+  opacity: 0;
+  transform: translate3d(0, 40px, 0) scale(0.99);
+}
+
+.video-section--revealed .video-section__frame {
+  animation: lp-rise-card 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
 }
 
 .video-section__iframe {
@@ -144,5 +165,14 @@ const sectionClass = computed(() => [
   letter-spacing: -0.01em;
   color: var(--apple-text-secondary);
   max-width: 28ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-section__title,
+  .video-section__frame {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 </style>

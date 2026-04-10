@@ -1,8 +1,14 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
 const { t, tm } = useI18n()
+
+const { targetRef: ctaRevealRoot, isVisible: ctaRevealVisible } = useScrollReveal({
+  rootMargin: '0px 0px -8% 0px',
+  once: true,
+})
 
 const query = ref('')
 
@@ -21,13 +27,21 @@ const filteredFaq = computed(() => {
 </script>
 
 <template>
-  <section id="contacto" class="cta" aria-labelledby="cta-hero-title">
+  <section
+    id="contacto"
+    ref="ctaRevealRoot"
+    class="cta"
+    :class="{ 'cta--revealed': ctaRevealVisible }"
+    aria-labelledby="cta-hero-title"
+  >
     <div class="cta__wrap">
       <div class="cta__grid">
         <div class="cta__left">
-          <h2 id="cta-hero-title" class="cta__hero-title">{{ t('cta.heroTitle') }}</h2>
+          <h2 id="cta-hero-title" class="cta__hero-title cta__reveal--title" style="--reveal-i: 0">
+            {{ t('cta.heroTitle') }}
+          </h2>
 
-          <label class="cta__search-label">
+          <label class="cta__search-label cta__reveal" style="--reveal-i: 1">
             <span class="cta__search-icon pi pi-search" aria-hidden="true" />
             <input
               v-model="query"
@@ -40,14 +54,14 @@ const filteredFaq = computed(() => {
             />
           </label>
 
-          <h3 class="cta__faq-heading">{{ t('cta.faqTitle') }}</h3>
-          <p class="cta__support">
+          <h3 class="cta__faq-heading cta__reveal" style="--reveal-i: 2">{{ t('cta.faqTitle') }}</h3>
+          <p class="cta__support cta__reveal" style="--reveal-i: 3">
             {{ t('cta.supportBefore') }}<strong>{{ t('cta.supportBold') }}</strong>{{ t('cta.supportAfter') }}
           </p>
         </div>
 
         <div class="cta__right">
-          <div class="cta__faq-card">
+          <div class="cta__faq-card cta__reveal" style="--reveal-i: 4">
             <template v-if="filteredFaq.length">
               <details
                 v-for="(item, i) in filteredFaq"
@@ -98,6 +112,26 @@ const filteredFaq = computed(() => {
     grid-template-columns: minmax(260px, 1fr) minmax(320px, 1.15fr);
     gap: 3rem;
   }
+}
+
+.cta__reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.cta--revealed .cta__reveal {
+  animation: lp-rise-block 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--reveal-i, 0) * 0.07s);
+}
+
+.cta__reveal--title {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+}
+
+.cta--revealed .cta__reveal--title {
+  animation: lp-rise-title 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--reveal-i, 0) * 0.07s);
 }
 
 .cta__hero-title {
@@ -260,6 +294,15 @@ const filteredFaq = computed(() => {
 @media (max-width: 479px) {
   .cta__hero-title {
     font-size: clamp(1.45rem, 6vw, 1.85rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__reveal,
+  .cta__reveal--title {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 </style>

@@ -33,7 +33,7 @@ const { t } = useI18n()
 
 .privacy-main {
   flex: 1;
-  padding: 2.5rem 1.25rem 3rem;
+  padding: calc(env(safe-area-inset-top, 0px) + var(--landing-header-height) + 1.25rem) 1.25rem 3rem;
 }
 
 .privacy-article {

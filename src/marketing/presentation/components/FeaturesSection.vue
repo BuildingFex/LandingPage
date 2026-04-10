@@ -1,14 +1,26 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
 const { t, tm } = useI18n()
 
 const items = computed(() => tm('features.items'))
+
+const { targetRef: featRevealRoot, isVisible: featRevealVisible } = useScrollReveal({
+  rootMargin: '0px 0px -8% 0px',
+  once: true,
+})
 </script>
 
 <template>
-  <section id="beneficios" class="feat" aria-labelledby="feat-heading">
+  <section
+    id="beneficios"
+    ref="featRevealRoot"
+    class="feat"
+    :class="{ 'feat--revealed': featRevealVisible }"
+    aria-labelledby="feat-heading"
+  >
     <div class="feat__inner">
       <header class="feat__header">
         <h2 id="feat-heading" class="feat__heading">{{ t('features.heading') }}</h2>
@@ -16,7 +28,7 @@ const items = computed(() => tm('features.items'))
       </header>
 
       <ul class="feat__grid" role="list">
-        <li v-for="(item, i) in items" :key="i" class="feat-card">
+        <li v-for="(item, i) in items" :key="i" class="feat-card" :style="{ '--feat-stagger': i }">
           <div class="feat-card__icon-wrap" aria-hidden="true">
             <i :class="['feat-card__icon', 'pi', item.icon]" />
           </div>
@@ -57,6 +69,12 @@ const items = computed(() => tm('features.items'))
   letter-spacing: -0.035em;
   line-height: 1.1;
   color: var(--apple-text);
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+}
+
+.feat--revealed .feat__heading {
+  animation: lp-rise-title 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .feat__sub {
@@ -65,6 +83,13 @@ const items = computed(() => tm('features.items'))
   line-height: 1.5;
   letter-spacing: -0.018em;
   color: var(--apple-text-secondary);
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+.feat--revealed .feat__sub {
+  animation: lp-rise-soft 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.08s;
 }
 
 .feat__grid {
@@ -98,6 +123,8 @@ const items = computed(() => tm('features.items'))
 }
 
 .feat-card {
+  --feat-stagger: 0;
+
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -107,17 +134,36 @@ const items = computed(() => tm('features.items'))
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(0, 0, 0, 0.06);
+    0 12px 28px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transform: translate3d(0, 48px, 0) scale(0.985);
   transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    background-color 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    border-color 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.feat--revealed .feat-card {
+  animation: lp-rise-card 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.12s + var(--feat-stagger) * 0.085s);
 }
 
 .feat-card:hover {
+  background: var(--apple-blue);
+  border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.07),
-    0 20px 48px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+    0 16px 48px rgba(var(--apple-blue-rgb), 0.35),
+    0 4px 12px rgba(var(--apple-blue-rgb), 0.2);
+}
+
+.feat-card:hover .feat-card__title,
+.feat-card:hover .feat-card__text {
+  color: #f5f5f7;
+}
+
+.feat-card:hover .feat-card__icon-wrap {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
 }
 
 .feat-card__icon-wrap {
@@ -161,6 +207,20 @@ const items = computed(() => tm('features.items'))
     margin-left: 0;
     margin-right: 0;
     max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feat__heading,
+  .feat__sub,
+  .feat-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .feat-card:hover {
+    transform: none;
   }
 }
 </style>
