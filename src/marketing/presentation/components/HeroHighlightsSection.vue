@@ -203,29 +203,11 @@ const { targetRef: hlRevealRoot, isVisible: hlRevealVisible } = useScrollReveal(
   animation-delay: calc(0.08s + var(--hl-stagger) * 0.085s);
 }
 
-.hl-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(120% 90% at 50% -10%, rgba(255, 255, 255, 0.14), transparent 52%);
-  opacity: 0;
-  transition: opacity 0.5s var(--hl-card-ease);
-}
-
 .hl-card:hover {
   background: var(--apple-blue);
   border-color: rgba(255, 255, 255, 0.28);
-  box-shadow:
-    0 16px 48px rgba(var(--apple-blue-rgb), 0.35),
-    0 4px 12px rgba(var(--apple-blue-rgb), 0.2);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
   transform: translateY(-5px);
-}
-
-.hl-card:hover::before {
-  opacity: 1;
 }
 
 .hl-card__trigger {
@@ -349,7 +331,6 @@ const { targetRef: hlRevealRoot, isVisible: hlRevealVisible } = useScrollReveal(
   }
 
   .hl-card,
-  .hl-card::before,
   .hl-card__title,
   .hl-card__text,
   .hl-card__detail,
