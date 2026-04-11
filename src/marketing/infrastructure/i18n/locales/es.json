@@ -15,6 +15,25 @@
     "start": "Abrir la aplicación web",
     "navAria": "Principal"
   },
+  "auth": {
+    "tabsAria": "Iniciar sesión o crear cuenta",
+    "loginTab": "Iniciar sesión",
+    "registerTab": "Crear cuenta",
+    "loginTitle": "Iniciar sesión",
+    "registerTitle": "Crea tu cuenta",
+    "email": "Correo",
+    "password": "Contraseña",
+    "fullName": "Nombre completo",
+    "signIn": "Entrar",
+    "createAccount": "Crear cuenta",
+    "noAccount": "¿Nuevo?",
+    "goRegister": "Crear una cuenta",
+    "haveAccount": "¿Ya tienes cuenta?",
+    "goLogin": "Iniciar sesión",
+    "note": "Esta pantalla está lista para conectarla a tu API de autenticación.",
+    "ariaLogin": "Formulario de inicio de sesión",
+    "ariaRegister": "Formulario de registro"
+  },
   "hero": {
     "eyebrow": "PARA JUNTAS Y ADMINISTRACIÓN",
     "title": "Gestión de condominios y edificios en un solo lugar.",
@@ -23,30 +42,44 @@
     "logoAccent": "Fex",
     "ctaPrimary": "Abrir la aplicación web",
     "columnTitle": "Qué cubre BuildingFex",
+    "cardToggleExpand": "Mostrar descripción completa: {title}",
+    "cardToggleCollapse": "Ocultar descripción completa: {title}",
     "cards": [
       {
+        "icon": "pi-building",
         "title": "Áreas comunes",
-        "text": "Reservas, reglas y mantenimiento en una sola vista."
+        "text": "Reservas, reglas y mantenimiento en una sola vista.",
+        "detail": "Configura calendarios, cupos y flujos de aprobación para que los residentes reserven piscina, gimnasio y salones sin saturar a administración. Publica reglas, adjunta listas de chequeo y enlaza el mantenimiento a cada espacio para que nada quede entre hojas de cálculo y chats sueltos."
       },
       {
+        "icon": "pi-wallet",
         "title": "Cobranzas",
-        "text": "Cuotas, morosidad y visibilidad para propietarios."
+        "text": "Cuotas, morosidad y visibilidad para propietarios.",
+        "detail": "Define cronogramas de cuotas, envía recordatorios y ofrece a los propietarios saldos e historial claros. El área financiera registra pagos parciales, notas y excepciones en un solo lugar—reduciendo reclamos y correos repetidos."
       },
       {
+        "icon": "pi-wrench",
         "title": "Mantenimiento",
-        "text": "Pedidos, proveedores y estado para todo el edificio."
+        "text": "Pedidos, proveedores y estado para todo el edificio.",
+        "detail": "Abre órdenes desde residentes o personal, asigna proveedores y sigue el estado hasta el cierre. Adjunta fotos, define prioridades y conserva una línea de tiempo que la junta puede auditar—para que incidencias recurrentes y tiempos de respuesta no se pierdan en mensajes."
       },
       {
+        "icon": "pi-megaphone",
         "title": "Comunicados",
-        "text": "Avisos oficiales a residentes y comités."
+        "text": "Avisos oficiales a residentes y comités.",
+        "detail": "Publica avisos generales o segmentados con adjuntos y fechas de vigencia claras. Los residentes ven lo importante en contexto y los comités conservan un registro trazable de comunicaciones oficiales, sin PDFs dispersos en bandejas de entrada."
       },
       {
+        "icon": "pi-id-card",
         "title": "Accesos y visitas",
-        "text": "Registros alineados a las políticas del edificio."
+        "text": "Registros alineados a las políticas del edificio.",
+        "detail": "Preinscribe visitas, registra vehículos y alinea portería o vigilancia con la política de acceso del edificio. Un registro uniforme ayuda a seguridad y a la junta a responder «¿quién estuvo en el edificio?» sin revisar papelitos o planillas aisladas."
       },
       {
+        "icon": "pi-folder-open",
         "title": "Documentos",
-        "text": "Actas, reglamento y archivos para la comunidad."
+        "text": "Actas, reglamento y archivos para la comunidad.",
+        "detail": "Centraliza actas, reglamento interno, seguros y contratos con permisos razonables para junta, administración y residentes cuando corresponda. Versiones y búsqueda reducen los «reenvíame el archivo» y aceleran la entrada de nuevos administradores."
       }
     ]
   },
@@ -121,22 +154,28 @@
   },
   "features": {
     "heading": "Por qué eligen BuildingFex",
-    "sub": "Flujos claros para juntas, administradores y residentes, alineados a la ética profesional y a términos transparentes.",
+    "headingBlack": "Tecnología como",
+    "headingOrange": "aliada a servicio\nde tu edificio",
+    "paragraphs": [
+      "Integramos herramientas digitales en el día a día—desde lo financiero hasta la comunicación con residentes—para que juntas y administradores trabajen con claridad y menos fricción.",
+      "Nuestra forma de trabajar combina ingeniería sólida con términos transparentes y ética profesional, para que la comunidad confíe en la plataforma y en el proceso.",
+      "Ya sea un edificio pequeño o una torre grande, obtienes una experiencia coherente en este sitio y dentro de la aplicación web."
+    ],
     "items": [
       {
         "icon": "pi-desktop",
-        "title": "Una sola experiencia",
-        "text": "Misma interfaz en esta landing y en la aplicación web."
+        "title": "Foco en la tecnología como aliada estratégica",
+        "text": "Integramos herramientas digitales en todos los procesos, desde la gestión financiera hasta la comunicación con los residentes."
       },
       {
-        "icon": "pi-shield",
-        "title": "Entrega responsable",
-        "text": "Ingeniería guiada por códigos ACM/IEEE y términos de servicio claros para la comunidad."
+        "icon": "pi-chart-bar",
+        "title": "Tecnología con BI (Business Intelligence)",
+        "text": "Utilizamos Business Intelligence para generar reportes con indicadores claros para una gestión eficiente y estratégica."
       },
       {
-        "icon": "pi-chart-line",
-        "title": "Listo para escalar",
-        "text": "Diseño responsivo, inglés y español latinoamericano (es-419), con accesibilidad por defecto."
+        "icon": "pi-bolt",
+        "title": "Uso de IA en diversos procesos internos",
+        "text": "Aplicamos Inteligencia Artificial para automatizar tareas, optimizar recursos y mejorar la toma de decisiones."
       }
     ]
   },

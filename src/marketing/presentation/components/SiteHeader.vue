@@ -1,11 +1,10 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import LocaleSwitcher from './LocaleSwitcher.vue'
 import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
-import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -43,8 +42,6 @@ const nav = computed(() => [
   { hash: '#contacto', label: t('nav.contact') },
 ])
 
-const appEntry = computed(() => webAppUrl('/app'))
-
 function navLinkIsActive(hash) {
   if (route.name !== MarketingRouteNames.HOME) return false
   if (hash === '#inicio') return route.hash === '' || route.hash === '#inicio'
@@ -80,21 +77,9 @@ function navLinkIsActive(hash) {
         </nav>
         <LocaleSwitcher class="locale" />
         <Button
-          v-if="appEntry"
+          :as="RouterLink"
+          :to="{ name: MarketingRouteNames.LOGIN }"
           :label="t('header.start')"
-          as="a"
-          :href="appEntry"
-          outlined
-          rounded
-          severity="secondary"
-          size="small"
-          class="header-cta"
-        />
-        <Button
-          v-else
-          :label="t('header.start')"
-          as="a"
-          href="/#contacto"
           outlined
           rounded
           severity="secondary"

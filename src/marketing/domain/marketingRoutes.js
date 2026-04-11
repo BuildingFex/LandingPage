@@ -4,6 +4,8 @@
  */
 export const MarketingRouteNames = /** @type {const} */ ({
   HOME: 'home',
+  LOGIN: 'login',
+  REGISTER: 'register',
   TERMS: 'terms',
   PRIVACY: 'privacy',
 })
@@ -12,6 +14,8 @@ export const MarketingRouteNames = /** @type {const} */ ({
 
 export const MarketingPaths = /** @type {const} */ ({
   HOME: '/',
+  LOGIN: '/login',
+  REGISTER: '/register',
   TERMS: '/terms',
   PRIVACY: '/privacy',
 })

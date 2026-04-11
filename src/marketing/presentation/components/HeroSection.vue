@@ -1,12 +1,11 @@
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
-import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
+import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
 
 const { t } = useI18n()
-
-const appEntry = computed(() => webAppUrl('/app'))
 
 const heroRevealed = ref(false)
 onMounted(() => {
@@ -32,25 +31,13 @@ onMounted(() => {
 
         <div class="hero__reveal" style="--reveal-i: 3">
           <Button
-            v-if="appEntry"
             class="hero__cta"
+            :as="RouterLink"
+            :to="{ name: MarketingRouteNames.LOGIN }"
             :label="t('hero.ctaPrimary')"
             icon="pi pi-arrow-right"
             iconPos="right"
             rounded
-            as="a"
-            :href="appEntry"
-            severity="info"
-          />
-          <Button
-            v-else
-            class="hero__cta"
-            :label="t('hero.ctaPrimary')"
-            icon="pi pi-arrow-right"
-            iconPos="right"
-            rounded
-            as="a"
-            href="/#contacto"
             severity="info"
           />
         </div>
