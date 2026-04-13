@@ -1,10 +1,10 @@
+/*APLICAMOS UN ESTILO MINIMALISTA PARA MARKETING Y LA PAGINA DE PRODUCTO*/
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Apple-style design system (marketing / product page language) */
 :root {
   --apple-font:
     -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Segoe UI', 'Helvetica Neue',
@@ -46,7 +46,7 @@
   --apple-focus-ring: 2px solid var(--apple-blue);
   --apple-focus-ring-offset: 2px;
 
-  /* Altura reservada al header fijo (barra + nav en móvil) — padding del hero y scroll-margin de anclas */
+
   --landing-header-height: 4rem;
 
   /* Aliases used across Vue components */
@@ -70,7 +70,8 @@
   }
 }
 
-/* Anclas: el contenido no queda bajo el header fijo */
+/*EL HEADER QUEDA FIJO SOBRE EL CONTENIDO*/
+
 :where(section[id], main[id]) {
   scroll-margin-top: calc(var(--landing-header-height) + 0.35rem);
 }

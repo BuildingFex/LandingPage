@@ -1,3 +1,4 @@
+/*SELECCION DE IDIOMA*/
 /** @typedef {'en' | 'es'} SupportedLocaleCode */
 
 /** @readonly */
