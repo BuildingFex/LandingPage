@@ -6,8 +6,6 @@
   "nav": {
     "home": "Inicio",
     "subscriptions": "Suscripciones",
-    "productVideo": "Video del producto",
-    "teamVideo": "Video del equipo",
     "benefits": "Beneficios",
     "contact": "Contacto"
   },
@@ -138,20 +136,6 @@
       }
     ]
   },
-  "videos": {
-    "product": {
-      "title": "Acerca del producto",
-      "placeholder": "Video de YouTube aún no configurado. Agrega el ID al entorno y vuelve a desplegar.",
-      "embedAria": "Video acerca del producto",
-      "iframeTitle": "Resumen del producto BuildingFex en YouTube"
-    },
-    "team": {
-      "title": "Acerca del equipo",
-      "placeholder": "Video del equipo pendiente. Pega el ID de YouTube más adelante.",
-      "embedAria": "Video acerca del equipo",
-      "iframeTitle": "Equipo y proceso BuildingFex en YouTube"
-    }
-  },
   "features": {
     "heading": "Por qué eligen BuildingFex",
     "headingBlack": "Tecnología como",
@@ -200,10 +184,6 @@
       {
         "question": "¿Cómo contacto al equipo?",
         "answer": "Puedes escribirnos a hola@ejemplo.com o abrir un ticket desde Soporte en tu perfil cuando tengas acceso a la aplicación."
-      },
-      {
-        "question": "¿Dónde veo el video del producto o del equipo?",
-        "answer": "En esta landing hay secciones dedicadas más abajo. Si no cargan, es posible que falte configurar los IDs de YouTube en el entorno de despliegue."
       },
       {
         "question": "¿Mis datos están protegidos?",

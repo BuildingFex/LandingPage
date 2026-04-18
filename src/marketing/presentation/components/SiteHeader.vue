@@ -36,8 +36,6 @@ onUnmounted(() => {
 const nav = computed(() => [
   { hash: '#inicio', label: t('nav.home') },
   { hash: '#subscriptions', label: t('nav.subscriptions') },
-  { hash: '#video-product', label: t('nav.productVideo') },
-  { hash: '#video-team', label: t('nav.teamVideo') },
   { hash: '#beneficios', label: t('nav.benefits') },
   { hash: '#contacto', label: t('nav.contact') },
 ])

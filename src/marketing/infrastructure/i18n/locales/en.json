@@ -6,8 +6,6 @@
   "nav": {
     "home": "Home",
     "subscriptions": "Subscriptions",
-    "productVideo": "Product video",
-    "teamVideo": "Team video",
     "benefits": "Benefits",
     "contact": "Contact"
   },
@@ -138,20 +136,6 @@
       }
     ]
   },
-  "videos": {
-    "product": {
-      "title": "About the product",
-      "placeholder": "YouTube video not configured yet. Add the ID to your environment and redeploy.",
-      "embedAria": "About the product video",
-      "iframeTitle": "BuildingFex product overview on YouTube"
-    },
-    "team": {
-      "title": "About the team",
-      "placeholder": "Team video not configured yet. Paste the YouTube video ID later.",
-      "embedAria": "About the team video",
-      "iframeTitle": "BuildingFex team and process on YouTube"
-    }
-  },
   "features": {
     "heading": "Why property managers choose BuildingFex",
     "headingBlack": "Technology as",
@@ -200,10 +184,6 @@
       {
         "question": "How do I contact the team?",
         "answer": "Email hola@ejemplo.com or open a ticket from Support in your profile once you have access to the application."
-      },
-      {
-        "question": "Where are the product and team videos?",
-        "answer": "This landing includes dedicated sections below. If they don’t load, the YouTube IDs may still need to be set in your deployment environment."
       },
       {
         "question": "Is my data protected?",

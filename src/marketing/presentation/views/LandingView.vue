@@ -4,7 +4,6 @@ import SkipLink from '../components/SkipLink.vue'
 import HeroSection from '../components/HeroSection.vue'
 import HeroHighlightsSection from '../components/HeroHighlightsSection.vue'
 import SubscriptionsSection from '../components/SubscriptionsSection.vue'
-import VideoEmbedSection from '../components/VideoEmbedSection.vue'
 import FeaturesSection from '../components/FeaturesSection.vue'
 import CtaSection from '../components/CtaSection.vue'
 import SiteFooter from '../components/SiteFooter.vue'
@@ -18,8 +17,6 @@ import SiteFooter from '../components/SiteFooter.vue'
     <HeroHighlightsSection />
     <main id="main-content" role="main" tabindex="-1">
       <SubscriptionsSection />
-      <VideoEmbedSection video-key="product" variant="default" />
-      <VideoEmbedSection video-key="team" variant="muted" />
       <FeaturesSection />
       <CtaSection />
     </main>
