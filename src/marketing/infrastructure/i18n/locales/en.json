@@ -7,10 +7,6 @@
     "home": "Home",
     "subscriptions": "Subscriptions",
     "benefits": "Benefits",
-    "howItWorks": "How it works",
-    "testimonials": "Stories",
-    "trust": "Trust",
-    "videos": "Videos",
     "contact": "Contact"
   },
   "header": {
@@ -166,81 +162,6 @@
         "text": "We apply artificial intelligence to automate tasks, optimize resources, and support better decision-making."
       }
     ]
-  },
-  "howItWorks": {
-    "heading": "How it works",
-    "lead": "Three steps to move your building into one digital home.",
-    "steps": [
-      {
-        "number": "1",
-        "icon": "pi-user-plus",
-        "title": "Register your building",
-        "text": "Set units, roles, and contact channels so boards, managers, and residents stay aligned."
-      },
-      {
-        "number": "2",
-        "icon": "pi-sliders-h",
-        "title": "Configure workflows",
-        "text": "Define common areas, fees, announcements, and access policies that match your community."
-      },
-      {
-        "number": "3",
-        "icon": "pi-chart-line",
-        "title": "Operate with visibility",
-        "text": "Track collections, maintenance, and reports without scattered spreadsheets."
-      }
-    ]
-  },
-  "testimonials": {
-    "heading": "What customers say",
-    "lead": "Managers and boards that value clarity and fewer manual handoffs.",
-    "items": [
-      {
-        "quote": "We moved from email threads and spreadsheets to one dashboard. Delinquency dropped because everyone sees the same numbers.",
-        "name": "María Castillo",
-        "role": "Property manager, tower in San Isidro"
-      },
-      {
-        "quote": "Residents understand notices better, and common-area bookings stopped colliding on the calendar.",
-        "name": "Luis Ortega",
-        "role": "Board president, Miraflores"
-      },
-      {
-        "quote": "Support was quick during rollout and the team adopted the web app without friction.",
-        "name": "Ana Ríos",
-        "role": "Operations sub-manager"
-      }
-    ]
-  },
-  "trustStats": {
-    "heading": "Trust with substance",
-    "lead": "Illustrative metrics you can tune to your real rollout.",
-    "stats": [
-      {
-        "value": "120+",
-        "label": "Buildings onboarded",
-        "hint": "Implementations with ongoing follow-up."
-      },
-      {
-        "value": "35%",
-        "label": "Less time on reports",
-        "hint": "Reference average when data lives in one place."
-      },
-      {
-        "value": "24/7",
-        "label": "Platform access",
-        "hint": "Web and app, same experience."
-      }
-    ]
-  },
-  "videos": {
-    "heading": "Videos",
-    "lead": "See the product and team in action.",
-    "productTitle": "Product",
-    "teamTitle": "Team",
-    "embedAriaProduct": "Video player: BuildingFex product",
-    "embedAriaTeam": "Video player: BuildingFex team",
-    "hint": "Set VITE_YOUTUBE_PRODUCT_ID and/or VITE_YOUTUBE_TEAM_ID in your environment to show the YouTube embeds."
   },
   "cta": {
     "heroTitle": "How can we help you?",
