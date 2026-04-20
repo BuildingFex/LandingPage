@@ -4,9 +4,18 @@ import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
 import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
-
+// Hook de internacionalización
 const { t } = useI18n()
-
+/**
+ * Hero Component
+ * -----------------
+ * Este componente representa la sección principal (Hero) de la landing page.
+ * Incluye:
+ * - Imagen de fondo con overlays
+ * - Animaciones de entrada progresivas
+ * - Contenido internacionalizado (i18n)
+ * - Botón CTA que redirige al login
+ */
 const heroRevealed = ref(false)
 onMounted(() => {
   requestAnimationFrame(() => {
@@ -16,6 +25,10 @@ onMounted(() => {
 </script>
 
 <template>
+  <!--
+    Sección principal HERO
+    - Aplica clase dinámica para activar animaciones
+  -->
   <section id="inicio" class="hero" :class="{ 'hero--revealed': heroRevealed }">
     <div class="hero__media" aria-hidden="true">
       <div class="hero__bg" />
@@ -48,6 +61,15 @@ onMounted(() => {
 
 <style scoped>
 /* Hero: Apple marketing — tipografía del sistema, cristal mate, CTA azul */
+/*
+ * HERO STYLES
+ * --------------
+ * Diseño inspirado en landing pages modernas (estilo Apple).
+ * Incluye:
+ * - Fondo oscuro con imagen
+ * - Tipografía limpia
+ * - CTA tipo píldora
+ */
 .hero {
   --hero-fg: #f5f5f7;
   --hero-fg-muted: rgba(245, 245, 247, 0.72);
@@ -237,7 +259,9 @@ onMounted(() => {
 .hero__cta :deep(.p-button .p-button-icon) {
   color: var(--hero-cta-fg) !important;
 }
-
+/**
+ *  Responsive (móviles)
+ */
 @media (max-width: 639px) {
   .hero {
     min-height: min(100dvh, 720px);
@@ -256,7 +280,7 @@ onMounted(() => {
     max-width: none;
     font-size: 1rem;
   }
-
+  /*Botón ocupa ancho en movil */
   .hero__cta {
     width: 100%;
   }
