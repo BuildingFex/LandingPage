@@ -5,6 +5,10 @@ import HeroSection from '../components/HeroSection.vue'
 import HeroHighlightsSection from '../components/HeroHighlightsSection.vue'
 import SubscriptionsSection from '../components/SubscriptionsSection.vue'
 import FeaturesSection from '../components/FeaturesSection.vue'
+import HowItWorksSection from '../components/HowItWorksSection.vue'
+import TestimonialsSection from '../components/TestimonialsSection.vue'
+import TrustStatsSection from '../components/TrustStatsSection.vue'
+import VideosSection from '../components/VideosSection.vue'
 import CtaSection from '../components/CtaSection.vue'
 import SiteFooter from '../components/SiteFooter.vue'
 </script>
@@ -18,6 +22,10 @@ import SiteFooter from '../components/SiteFooter.vue'
     <main id="main-content" role="main" tabindex="-1">
       <SubscriptionsSection />
       <FeaturesSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <TrustStatsSection />
+      <VideosSection />
       <CtaSection />
     </main>
     <SiteFooter />
