@@ -37,6 +37,10 @@ const nav = computed(() => [
   { hash: '#inicio', label: t('nav.home') },
   { hash: '#subscriptions', label: t('nav.subscriptions') },
   { hash: '#beneficios', label: t('nav.benefits') },
+  { hash: '#como-funciona', label: t('nav.howItWorks') },
+  { hash: '#testimonios', label: t('nav.testimonials') },
+  { hash: '#confianza', label: t('nav.trust') },
+  { hash: '#videos', label: t('nav.videos') },
   { hash: '#contacto', label: t('nav.contact') },
 ])
 

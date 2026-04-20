@@ -12,3 +12,9 @@ export function webAppUrl(path) {
 
 /** Optional link for “Developed by” badge in the footer (e.g. agency site). */
 export const DEVELOPER_URL = (import.meta.env.VITE_DEVELOPER_URL ?? '').replace(/\/$/, '')
+
+/** YouTube video ID for the product demo embed on the landing (optional). */
+export const YOUTUBE_PRODUCT_ID = String(import.meta.env.VITE_YOUTUBE_PRODUCT_ID ?? '').trim()
+
+/** YouTube video ID for the team/story embed on the landing (optional). */
+export const YOUTUBE_TEAM_ID = String(import.meta.env.VITE_YOUTUBE_TEAM_ID ?? '').trim()
