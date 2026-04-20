@@ -7,6 +7,10 @@
     "home": "Inicio",
     "subscriptions": "Suscripciones",
     "benefits": "Beneficios",
+    "howItWorks": "Cómo funciona",
+    "testimonials": "Testimonios",
+    "trust": "Confianza",
+    "videos": "Vídeos",
     "contact": "Contacto"
   },
   "header": {
@@ -162,6 +166,81 @@
         "text": "Aplicamos Inteligencia Artificial para automatizar tareas, optimizar recursos y mejorar la toma de decisiones."
       }
     ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "lead": "Tres pasos para llevar tu edificio a un solo lugar digital.",
+    "steps": [
+      {
+        "number": "1",
+        "icon": "pi-user-plus",
+        "title": "Registra tu edificio",
+        "text": "Indica unidades, roles y canales de contacto para alinear a junta, administración y residentes."
+      },
+      {
+        "number": "2",
+        "icon": "pi-sliders-h",
+        "title": "Configura procesos",
+        "text": "Define áreas comunes, cuotas, comunicados y accesos según las políticas de tu comunidad."
+      },
+      {
+        "number": "3",
+        "icon": "pi-chart-line",
+        "title": "Opera con visibilidad",
+        "text": "Consulta reportes, seguimiento de cobranzas y mantenimiento sin depender de hojas sueltas."
+      }
+    ]
+  },
+  "testimonials": {
+    "heading": "Lo que dicen quienes ya lo usan",
+    "lead": "Administradores y juntas que priorizan orden y comunicación clara.",
+    "items": [
+      {
+        "quote": "Pasamos de correos y planillas a un solo tablero. La morosidad bajó porque todos ven el mismo número.",
+        "name": "María Castillo",
+        "role": "Administradora, torre en San Isidro"
+      },
+      {
+        "quote": "Los residentes entienden mejor los avisos y las reservas de áreas comunes dejaron de chocar en fechas.",
+        "name": "Luis Ortega",
+        "role": "Presidente de junta, Miraflores"
+      },
+      {
+        "quote": "El soporte respondió rápido en el despliegue y el equipo adoptó la web sin fricción.",
+        "name": "Ana Ríos",
+        "role": "Subgerencia de operaciones"
+      }
+    ]
+  },
+  "trustStats": {
+    "heading": "Confianza con respaldo",
+    "lead": "Cifras orientativas para mostrar madurez operativa; ajústalas a tu caso real.",
+    "stats": [
+      {
+        "value": "120+",
+        "label": "Edificios acompañados",
+        "hint": "Implementaciones y seguimiento continuo."
+      },
+      {
+        "value": "35%",
+        "label": "Menos tiempo en reportes",
+        "hint": "Promedio referencial en equipos que centralizan datos."
+      },
+      {
+        "value": "24/7",
+        "label": "Acceso a la plataforma",
+        "hint": "Web y app con la misma experiencia."
+      }
+    ]
+  },
+  "videos": {
+    "heading": "Vídeos",
+    "lead": "Conoce el producto y al equipo en acción.",
+    "productTitle": "Producto",
+    "teamTitle": "Equipo",
+    "embedAriaProduct": "Reproductor de vídeo: producto BuildingFex",
+    "embedAriaTeam": "Reproductor de vídeo: equipo BuildingFex",
+    "hint": "Configura VITE_YOUTUBE_PRODUCT_ID y/o VITE_YOUTUBE_TEAM_ID en tu entorno para mostrar los vídeos de YouTube."
   },
   "cta": {
     "heroTitle": "¿Cómo podemos ayudarte?",
