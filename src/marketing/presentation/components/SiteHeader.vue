@@ -9,7 +9,6 @@ import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
 const { t } = useI18n()
 const route = useRoute()
 
-/** Pixels scrolled before the bar turns solid (home only). */
 const SCROLL_SOLID_THRESHOLD = 16
 
 const scrollY = ref(0)
@@ -274,9 +273,7 @@ function navLinkIsActive(hash) {
   flex-shrink: 0;
 }
 
-/* `header-cta` va en la raíz del Button (mismo nodo que .p-button), no es padre del botón */
 .header-cta.p-button {
-  /* Apple-style capsule: full pill + clip contents (PrimeVue outline + ripple) */
   border-radius: var(--apple-radius-pill) !important;
   overflow: hidden;
   font-family: var(--apple-font) !important;
@@ -333,7 +330,6 @@ function navLinkIsActive(hash) {
     0 0 0 0.5px rgba(0, 0, 0, 0.06);
 }
 
-/* Mismo nodo: .header-cta.p-button — texto blanco sobre hero (gana a tema outlined secondary) */
 .header--transparent .header-cta.p-button.p-button-outlined.p-button-secondary {
   background: transparent !important;
   border-color: rgba(255, 255, 255, 0.45) !important;
@@ -371,7 +367,6 @@ function navLinkIsActive(hash) {
   outline-offset: 2px;
 }
 
-/* Logo: sin invert (rompe muchos PNG); chip claro para que el asset original se lea sobre el hero */
 .header--transparent .brand {
   padding: 0.2rem 0.5rem;
   background: rgba(255, 255, 255, 0.94);

@@ -161,7 +161,6 @@ const { targetRef: hlRevealRoot, isVisible: hlRevealVisible } = useScrollReveal(
     transform 0.5s var(--hl-card-spring);
 }
 
-/* Franja izquierda: azul marca, solo radios a la izquierda (como mockup) */
 .hl-card__icon-rail {
   position: relative;
   z-index: 2;

@@ -81,7 +81,6 @@ const { targetRef: subsRevealRoot, isVisible: subsRevealVisible } = useScrollRev
 
 <style scoped>
 .subs {
-  /* Alineado al azul de marca (main.css) */
   --subs-accent: var(--apple-blue);
   --subs-accent-hover: var(--apple-blue-hover);
 
@@ -342,7 +341,6 @@ const { targetRef: subsRevealRoot, isVisible: subsRevealVisible } = useScrollRev
   box-shadow: 0 4px 14px rgba(var(--apple-blue-rgb), 0.35);
 }
 
-/* Sobre fondo celeste de la tarjeta: botón claro con texto azul (mismo tono que el CTA) */
 .subs__card:hover .subs__cta :deep(.p-button:not(:disabled)) {
   background: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.95) !important;

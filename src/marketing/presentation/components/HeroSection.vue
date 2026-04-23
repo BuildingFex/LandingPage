@@ -4,18 +4,9 @@ import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
 import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
-// Hook de internacionalización
+
 const { t } = useI18n()
-/**
- * Hero Component
- * -----------------
- * Este componente representa la sección principal (Hero) de la landing page.
- * Incluye:
- * - Imagen de fondo con overlays
- * - Animaciones de entrada progresivas
- * - Contenido internacionalizado (i18n)
- * - Botón CTA que redirige al login
- */
+
 const heroRevealed = ref(false)
 onMounted(() => {
   requestAnimationFrame(() => {
@@ -25,10 +16,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <!--
-    Sección principal HERO
-    - Aplica clase dinámica para activar animaciones
-  -->
   <section id="inicio" class="hero" :class="{ 'hero--revealed': heroRevealed }">
     <div class="hero__media" aria-hidden="true">
       <div class="hero__bg" />
@@ -60,21 +47,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Hero: Apple marketing — tipografía del sistema, cristal mate, CTA azul */
-/*
- * HERO STYLES
- * --------------
- * Diseño inspirado en landing pages modernas (estilo Apple).
- * Incluye:
- * - Fondo oscuro con imagen
- * - Tipografía limpia
- * - CTA tipo píldora
- */
 .hero {
   --hero-fg: #f5f5f7;
   --hero-fg-muted: rgba(245, 245, 247, 0.72);
   --hero-fg-eyebrow: rgba(245, 245, 247, 0.58);
-  /* CTA solo en hero: píldora clara sobre imagen oscura */
   --hero-cta-bg: #f5f5f7;
   --hero-cta-bg-hover: #ffffff;
   --hero-cta-fg: #1d1d1f;
@@ -87,7 +63,6 @@ onMounted(() => {
   justify-content: flex-end;
   padding: 0;
   margin: 0;
-  /* El header es fixed: el hero empieza arriba del todo y el fondo queda detrás del header */
   overflow: hidden;
   font-family: var(--apple-font);
   -webkit-font-smoothing: antialiased;
@@ -124,7 +99,6 @@ onMounted(() => {
     linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.22) 52%, rgba(0, 0, 0, 0.04) 100%);
 }
 
-/* Cinta de sombra bajo el header (degradado negro suave hacia abajo) */
 .hero__top-shade {
   position: absolute;
   top: 0;
@@ -259,9 +233,7 @@ onMounted(() => {
 .hero__cta :deep(.p-button .p-button-icon) {
   color: var(--hero-cta-fg) !important;
 }
-/**
- *  Responsive (móviles)
- */
+
 @media (max-width: 639px) {
   .hero {
     min-height: min(100dvh, 720px);
@@ -280,7 +252,7 @@ onMounted(() => {
     max-width: none;
     font-size: 1rem;
   }
-  /*Botón ocupa ancho en movil */
+
   .hero__cta {
     width: 100%;
   }

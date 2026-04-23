@@ -9,7 +9,6 @@ const { t } = useI18n()
 </template>
 
 <style scoped>
-/* Oculto visualmente pero enfocable; sin trozo azul en pantalla hasta :focus-visible */
 .skip-link {
   position: absolute;
   width: 1px;

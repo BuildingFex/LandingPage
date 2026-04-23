@@ -19,13 +19,9 @@ const regName = ref('')
 const regEmail = ref('')
 const regPassword = ref('')
 
-function onLoginSubmit() {
-  // Hook: replace with API / redirect to external app when wired
-}
+function onLoginSubmit() {}
 
-function onRegisterSubmit() {
-  // Hook: replace with API when wired
-}
+function onRegisterSubmit() {}
 </script>
 
 <template>

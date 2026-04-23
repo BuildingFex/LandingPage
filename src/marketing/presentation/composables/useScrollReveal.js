@@ -1,12 +1,5 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-/**
- * WhatsApp-like scroll reveal: toggles visibility when the target enters the viewport.
- * @param {object} [options]
- * @param {string} [options.rootMargin] IntersectionObserver rootMargin
- * @param {number|number[]} [options.threshold]
- * @param {boolean} [options.once] Stop observing after first reveal (default true)
- */
 export function useScrollReveal(options = {}) {
   const { rootMargin = '0px 0px -10% 0px', threshold = 0, once = true } = options
 
