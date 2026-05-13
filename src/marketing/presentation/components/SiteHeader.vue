@@ -5,6 +5,9 @@ import { RouterLink, useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import LocaleSwitcher from './LocaleSwitcher.vue'
 import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
+import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
+
+const webAppLoginUrl = webAppUrl('/login')
 
 const { t } = useI18n()
 const route = useRoute()
@@ -74,8 +77,8 @@ function navLinkIsActive(hash) {
         </nav>
         <LocaleSwitcher class="locale" />
         <Button
-          :as="RouterLink"
-          :to="{ name: MarketingRouteNames.LOGIN }"
+          as="a"
+          :href="webAppLoginUrl"
           :label="t('header.start')"
           outlined
           rounded

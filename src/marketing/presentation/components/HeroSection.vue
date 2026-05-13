@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
-import { MarketingRouteNames } from '@/marketing/domain/marketingRoutes.js'
+import { webAppUrl } from '@/marketing/infrastructure/envConfig.js'
+
+const webAppLoginUrl = webAppUrl('/login')
 
 const { t } = useI18n()
 
@@ -32,8 +33,8 @@ onMounted(() => {
         <div class="hero__reveal" style="--reveal-i: 3">
           <Button
             class="hero__cta"
-            :as="RouterLink"
-            :to="{ name: MarketingRouteNames.LOGIN }"
+            as="a"
+            :href="webAppLoginUrl"
             :label="t('hero.ctaPrimary')"
             icon="pi pi-arrow-right"
             iconPos="right"
