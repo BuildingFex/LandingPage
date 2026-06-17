@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection.vue'
 import HeroHighlightsSection from '../components/HeroHighlightsSection.vue'
 import SubscriptionsSection from '../components/SubscriptionsSection.vue'
 import FeaturesSection from '../components/FeaturesSection.vue'
+import VideosSection from '../components/VideosSection.vue'
 import CtaSection from '../components/CtaSection.vue'
 import SiteFooter from '../components/SiteFooter.vue'
 </script>
@@ -18,6 +19,7 @@ import SiteFooter from '../components/SiteFooter.vue'
     <main id="main-content" role="main" tabindex="-1">
       <SubscriptionsSection />
       <FeaturesSection />
+      <VideosSection />
       <CtaSection />
     </main>
     <SiteFooter />

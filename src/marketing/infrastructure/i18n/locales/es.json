@@ -163,6 +163,11 @@
       }
     ]
   },
+  "videos": {
+    "heading": "Conoce más sobre nosotros",
+    "productTitle": "Video sobre el producto",
+    "teamTitle": "Video sobre el equipo"
+  },
   "cta": {
     "heroTitle": "¿Cómo podemos ayudarte?",
     "searchPlaceholder": "Buscar",
