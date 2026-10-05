@@ -1,0 +1,66 @@
+@let t = i18n.t().hero;
+<section class="hero" id="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <p class="hero__badge">
+        <app-icon name="sparkle" [size]="16" />
+        {{ t.badge }}
+      </p>
+
+      <h1 class="hero__title">
+        {{ t.titleBefore }}<span>{{ t.titleHighlight }}</span>{{ t.titleAfter }}
+      </h1>
+
+      <p class="hero__subtitle">{{ t.subtitle }}</p>
+
+      <div class="hero__cta">
+        <a [href]="registerUrl()" class="btn btn--primary btn--lg">
+          <app-icon name="arrow-right" [size]="18" />
+          {{ t.primaryCta }}
+        </a>
+        <a href="#how-it-works" class="btn btn--secondary btn--lg" (click)="goTo($event, 'how-it-works')">
+          <app-icon name="play" [size]="18" />
+          {{ t.secondaryCta }}
+        </a>
+      </div>
+
+      <div class="hero__social-proof">
+        <div class="hero__stars" role="img" [attr.aria-label]="t.ratingLabel">
+          @for (star of stars; track star) {
+            <app-icon name="star" [size]="18" />
+          }
+          <span class="hero__stars-text">{{ t.rating }}</span>
+        </div>
+
+        <div class="hero__logos">
+          <span class="hero__logos-label">{{ t.trustedBy }}</span>
+          <ul class="hero__logo-list">
+            @for (client of clients; track client.name) {
+              <li class="hero__logo-item">
+                <app-icon [name]="client.icon" [size]="20" />
+                {{ client.name }}
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__visual-dashboard">
+        <img
+          src="assets/img/dashboard-mockup.webp"
+          srcset="assets/img/dashboard-mockup-640.webp 640w, assets/img/dashboard-mockup.webp 1024w"
+          sizes="(max-width: 1024px) min(550px, 100vw), 560px"
+          [alt]="t.dashboardAlt"
+          width="1024"
+          height="1024"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero__visual-phone">
+        <img src="assets/img/phone-qr-mockup.webp" [alt]="t.phoneAlt" width="360" height="360" />
+      </div>
+    </div>
+  </div>
+</section>

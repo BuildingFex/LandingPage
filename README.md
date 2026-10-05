@@ -1,10 +1,10 @@
-# BuildingFex — Landing
+# FixCore — Landing
 
-Sitio estático de marketing para BuildingFex, construido con Vue 3 y Vite.
+Sitio de marketing de FixCore (CMMS para mantenimiento industrial), construido con **Angular 21** (componentes standalone, signals, sin zone.js). Responsive desde 320 px hasta escritorio.
 
 ## Requisitos
 
-- Node.js 18 o superior (recomendado LTS)
+- Node.js 20.19+, 22.12+ o 24+
 - npm
 
 ## Instalación
@@ -16,33 +16,52 @@ npm install
 ## Desarrollo
 
 ```bash
-npm run dev
+npm start
 ```
 
-Abre la URL que muestra Vite (por defecto `http://localhost:5173`).
+Abre `http://localhost:4200`.
 
 ## Producción
 
 ```bash
 npm run build
-npm run preview   # sirve la carpeta dist localmente
 ```
 
-## Variables de entorno
+La salida queda en `dist/fixcore-landing/browser` (configurado en `vercel.json`).
 
-Copia `.env.example` a `.env` y ajusta los valores:
+## Rutas
 
-| Variable | Descripción |
-|----------|-------------|
-| `VITE_WEB_APP_URL` | URL base de la aplicación web (sin barra final). Enlaces del hero y CTAs. |
-| `VITE_YOUTUBE_PRODUCT_ID` | ID de YouTube para el vídeo de producto (opcional). |
-| `VITE_YOUTUBE_TEAM_ID` | ID de YouTube para el vídeo del equipo (opcional). |
-| `VITE_DEVELOPER_URL` | URL opcional para el enlace “Desarrollado por” en el pie. |
+| Ruta | Página |
+|------|--------|
+| `/es`, `/en` | Landing |
+| `/es/login`, `/en/login` | Iniciar sesión / crear cuenta (`#register` abre la pestaña de registro) |
+| `/es/terms`, `/en/terms` | Términos y condiciones |
 
-## Estructura del código
+Las URLs del sitio estático anterior (`index.html`, `login-en.html`, `terms.html`, …) redirigen a su ruta equivalente.
 
-El código de la landing vive bajo `src/marketing/`, organizado por capas (dominio, aplicación, infraestructura y presentación).
+## Enlaces a la app FixCore
+
+`src/app/core/config/fixcore-app.ts` define la URL de la app Next.js: `https://fixcore-app.vercel.app` en producción y `http://localhost:3000` cuando la landing corre en local. Desde ahí salen los enlaces de "Iniciar Sesión" (`/login`), "Solicitar Demo" / "Prueba Gratis" (`/registro`) y la redirección al `/dashboard` tras el login.
+
+## Estructura
+
+```
+src/app/
+  core/
+    config/      URL de la app FixCore
+    i18n/        idioma activo (signal), guard de /:lang y textos es.ts / en.ts
+    seo/         título y meta description por página/idioma
+  shared/
+    components/  icon, logo, selector de idioma
+    directives/  appReveal (animación al hacer scroll), appCountUp (contadores)
+  features/
+    landing/     página principal y sus secciones
+    auth/        login / registro
+    legal/       términos y condiciones
+```
+
+Todos los textos están en `src/app/core/i18n/translations/` (el tipo de `en.ts` se deriva de `es.ts`, así que falta una clave = error de compilación).
 
 ## Licencia
 
-Privado — BuildingFex.
+Privado — FixCore.

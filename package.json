@@ -1,23 +1,30 @@
 {
-  "name": "landingpage",
-  "private": true,
+  "name": "fixcore-landing",
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
+  "private": true,
+  "packageManager": "npm@11.11.0",
   "dependencies": {
-    "@primevue/themes": "^4.2.5",
-    "primeicons": "^7.0.0",
-    "primevue": "^4.2.5",
-    "vue": "^3.5.13",
-    "vue-i18n": "^10.0.5",
-    "vue-router": "^4.6.4"
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
-    "vite": "^6.2.0"
+    "@angular/build": "^21.2.25",
+    "@angular/cli": "^21.2.25",
+    "@angular/compiler-cli": "^21.2.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2"
   }
 }

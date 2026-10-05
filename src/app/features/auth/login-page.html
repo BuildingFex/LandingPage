@@ -1,0 +1,331 @@
+@let t = i18n.t().auth;
+<div class="auth-page">
+  <!-- Branding panel (desktop only) -->
+  <aside class="auth-branding">
+    <div class="auth-branding__dots"></div>
+    <div class="auth-branding__dots auth-branding__dots--bottom"></div>
+
+    <div class="auth-branding__content">
+      <a class="auth-branding__logo" [routerLink]="i18n.path()">
+        <app-logo-mark tone="light" [size]="52" />
+        <span class="auth-branding__logo-text">Fix<span>Core</span></span>
+      </a>
+
+      <p class="auth-branding__tagline">{{ t.tagline }}</p>
+      <p class="auth-branding__desc">{{ t.desc }}</p>
+
+      <ul class="auth-branding__features">
+        @for (pill of t.pills; track pill) {
+          <li class="auth-branding__feature">
+            <app-icon name="check" [size]="16" [stroke]="2.5" />
+            {{ pill }}
+          </li>
+        }
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Form panel -->
+  <main class="auth-form-panel">
+    <div class="auth-topbar">
+      <a [routerLink]="i18n.path()" class="auth-topbar__back">
+        <app-icon name="arrow-left" [size]="18" />
+        {{ t.back }}
+      </a>
+      <app-lang-toggle />
+    </div>
+
+    <div class="auth-form-container">
+      <a class="auth-mobile-logo" [routerLink]="i18n.path()">
+        <app-logo-mark [size]="36" [inner]="false" />
+        <span>Fix<span>Core</span></span>
+      </a>
+
+      <div class="auth-tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="auth-tab"
+          id="tab-login"
+          aria-controls="panel-login"
+          [class.active]="tab() === 'login'"
+          [attr.aria-selected]="tab() === 'login'"
+          (click)="switchTab('login')"
+        >
+          {{ t.tabLogin }}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="auth-tab"
+          id="tab-register"
+          aria-controls="panel-register"
+          [class.active]="tab() === 'register'"
+          [attr.aria-selected]="tab() === 'register'"
+          (click)="switchTab('register')"
+        >
+          {{ t.tabRegister }}
+        </button>
+      </div>
+
+      <ng-template #alertTpl>
+        @if (alert(); as a) {
+          <div class="form-alert" [class]="'form-alert--' + a.kind" role="status" aria-live="polite">
+            <app-icon
+              [name]="a.kind === 'error' ? 'x-circle' : a.kind === 'success' ? 'check-circle' : 'info'"
+              [size]="16"
+            />
+            <span>{{ a.text }}</span>
+          </div>
+        }
+      </ng-template>
+
+      <ng-template #socialTpl>
+        <div class="social-btns">
+          <button type="button" class="btn-social" (click)="socialLogin('Google')">
+            <app-icon name="google" [size]="20" />
+            Google
+          </button>
+          <button type="button" class="btn-social" (click)="socialLogin('Microsoft')">
+            <app-icon name="microsoft" [size]="20" />
+            Microsoft
+          </button>
+        </div>
+      </ng-template>
+
+      @if (tab() === 'login') {
+        <!-- ===== LOGIN ===== -->
+        @let l = t.login;
+        @let f = loginForm.controls;
+        <section class="auth-form-content" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+          <h1 class="auth-form__title">{{ l.title }}</h1>
+          <p class="auth-form__subtitle">{{ l.subtitle }}</p>
+
+          <ng-container *ngTemplateOutlet="alertTpl" />
+
+          <form [formGroup]="loginForm" [class.shake]="shake()" (ngSubmit)="submitLogin()" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="loginEmail">{{ l.email }}</label>
+              <div class="form-input-wrapper">
+                <input
+                  class="form-input"
+                  [class.error]="showError(f.email)"
+                  type="email"
+                  id="loginEmail"
+                  formControlName="email"
+                  [placeholder]="t.emailPlaceholder"
+                  autocomplete="email"
+                  inputmode="email"
+                  [attr.aria-invalid]="showError(f.email)"
+                  aria-describedby="loginEmailError"
+                  (focus)="onFocus(f.email)"
+                />
+                <app-icon class="form-input-icon" name="mail" [size]="18" />
+              </div>
+              <p class="form-error-text" id="loginEmailError" [class.show]="showError(f.email)">
+                {{ t.emailError }}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="loginPassword">{{ t.password }}</label>
+              <div class="form-input-wrapper">
+                <input
+                  class="form-input form-input--with-toggle"
+                  [class.error]="showError(f.password)"
+                  [type]="showLoginPassword() ? 'text' : 'password'"
+                  id="loginPassword"
+                  formControlName="password"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                  [attr.aria-invalid]="showError(f.password)"
+                  aria-describedby="loginPasswordError"
+                  (focus)="onFocus(f.password)"
+                />
+                <app-icon class="form-input-icon" name="lock" [size]="18" />
+                <button
+                  type="button"
+                  class="form-password-toggle"
+                  [attr.aria-label]="showLoginPassword() ? t.hidePassword : t.showPassword"
+                  [attr.aria-pressed]="showLoginPassword()"
+                  (click)="showLoginPassword.set(!showLoginPassword())"
+                >
+                  <app-icon [name]="showLoginPassword() ? 'eye-off' : 'eye'" [size]="18" />
+                </button>
+              </div>
+              <p class="form-error-text" id="loginPasswordError" [class.show]="showError(f.password)">
+                {{ l.passwordError }}
+              </p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-checkbox">
+                <input type="checkbox" formControlName="remember" />
+                {{ l.remember }}
+              </label>
+              <a href="#" class="form-forgot" (click)="$event.preventDefault()">{{ l.forgot }}</a>
+            </div>
+
+            <button type="submit" class="btn-submit" [class.loading]="loading()" [attr.aria-busy]="loading()">
+              <span class="btn-submit__text">{{ l.submit }}</span>
+              <app-icon name="arrow-right" [size]="18" />
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>{{ l.divider }}</span></div>
+          <ng-container *ngTemplateOutlet="socialTpl" />
+        </section>
+      } @else {
+        <!-- ===== REGISTER ===== -->
+        @let r = t.register;
+        @let f = registerForm.controls;
+        <section class="auth-form-content" role="tabpanel" id="panel-register" aria-labelledby="tab-register">
+          <h1 class="auth-form__title">{{ r.title }}</h1>
+          <p class="auth-form__subtitle">{{ r.subtitle }}</p>
+
+          <ng-container *ngTemplateOutlet="alertTpl" />
+
+          <form [formGroup]="registerForm" [class.shake]="shake()" (ngSubmit)="submitRegister()" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="registerName">{{ r.name }}</label>
+              <div class="form-input-wrapper">
+                <input
+                  class="form-input"
+                  [class.error]="showError(f.name)"
+                  type="text"
+                  id="registerName"
+                  formControlName="name"
+                  [placeholder]="r.namePlaceholder"
+                  autocomplete="name"
+                  [attr.aria-invalid]="showError(f.name)"
+                  aria-describedby="registerNameError"
+                  (focus)="onFocus(f.name)"
+                />
+                <app-icon class="form-input-icon" name="user" [size]="18" />
+              </div>
+              <p class="form-error-text" id="registerNameError" [class.show]="showError(f.name)">
+                {{ r.nameError }}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="registerCompany">{{ r.company }}</label>
+              <div class="form-input-wrapper">
+                <input
+                  class="form-input"
+                  [class.error]="showError(f.company)"
+                  type="text"
+                  id="registerCompany"
+                  formControlName="company"
+                  [placeholder]="r.companyPlaceholder"
+                  autocomplete="organization"
+                  [attr.aria-invalid]="showError(f.company)"
+                  aria-describedby="registerCompanyError"
+                  (focus)="onFocus(f.company)"
+                />
+                <app-icon class="form-input-icon" name="building" [size]="18" />
+              </div>
+              <p class="form-error-text" id="registerCompanyError" [class.show]="showError(f.company)">
+                {{ r.companyError }}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="registerEmail">{{ r.email }}</label>
+              <div class="form-input-wrapper">
+                <input
+                  class="form-input"
+                  [class.error]="showError(f.email)"
+                  type="email"
+                  id="registerEmail"
+                  formControlName="email"
+                  [placeholder]="t.emailPlaceholder"
+                  autocomplete="email"
+                  inputmode="email"
+                  [attr.aria-invalid]="showError(f.email)"
+                  aria-describedby="registerEmailError"
+                  (focus)="onFocus(f.email)"
+                />
+                <app-icon class="form-input-icon" name="mail" [size]="18" />
+              </div>
+              <p class="form-error-text" id="registerEmailError" [class.show]="showError(f.email)">
+                {{ t.emailError }}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="registerPassword">{{ t.password }}</label>
+              <div class="form-input-wrapper">
+                <input
+                  class="form-input form-input--with-toggle"
+                  [class.error]="showError(f.password)"
+                  [type]="showRegisterPassword() ? 'text' : 'password'"
+                  id="registerPassword"
+                  formControlName="password"
+                  [placeholder]="r.passwordPlaceholder"
+                  autocomplete="new-password"
+                  [attr.aria-invalid]="showError(f.password)"
+                  aria-describedby="registerPasswordError passwordStrength"
+                  (focus)="onFocus(f.password)"
+                />
+                <app-icon class="form-input-icon" name="lock" [size]="18" />
+                <button
+                  type="button"
+                  class="form-password-toggle"
+                  [attr.aria-label]="showRegisterPassword() ? t.hidePassword : t.showPassword"
+                  [attr.aria-pressed]="showRegisterPassword()"
+                  (click)="showRegisterPassword.set(!showRegisterPassword())"
+                >
+                  <app-icon [name]="showRegisterPassword() ? 'eye-off' : 'eye'" [size]="18" />
+                </button>
+              </div>
+              <p class="form-error-text" id="registerPasswordError" [class.show]="showError(f.password)">
+                {{ r.passwordError }}
+              </p>
+              <div class="password-strength" id="passwordStrength" aria-live="polite">
+                @if (strength(); as s) {
+                  <div class="password-strength__bars">
+                    @for (bar of strengthBars; track bar) {
+                      <span [style.background]="bar < s.score ? s.color : null"></span>
+                    }
+                  </div>
+                  <span class="password-strength__text" [style.color]="s.color">{{ s.label }}</span>
+                }
+              </div>
+            </div>
+
+            <label class="form-checkbox form-checkbox--terms" [class.error]="termsError()">
+              <input
+                type="checkbox"
+                formControlName="terms"
+                [attr.aria-invalid]="termsError()"
+                aria-describedby="termsError"
+                (change)="termsError.set(false)"
+              />
+              <span>
+                {{ r.acceptPrefix }}<a [routerLink]="i18n.path('terms')" target="_blank">{{ r.termsLink }}</a
+                >{{ r.acceptMiddle }}<a href="#" (click)="$event.preventDefault()">{{ r.privacyLink }}</a>
+              </span>
+            </label>
+            <p class="form-error-text form-error-text--terms" id="termsError" [class.show]="termsError()">
+              {{ r.termsError }}
+            </p>
+
+            <button type="submit" class="btn-submit" [class.loading]="loading()" [attr.aria-busy]="loading()">
+              <span class="btn-submit__text">{{ r.submit }}</span>
+              <app-icon name="arrow-right" [size]="18" />
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>{{ r.divider }}</span></div>
+          <ng-container *ngTemplateOutlet="socialTpl" />
+        </section>
+      }
+
+      <footer class="auth-footer">
+        &copy; {{ year }} FixCore. {{ i18n.t().footer.rights }}
+        <a [routerLink]="i18n.path('terms')">{{ i18n.t().footer.terms }}</a>
+      </footer>
+    </div>
+  </main>
+</div>
