@@ -1,0 +1,43 @@
+@let t = i18n.t();
+<header class="header" [class.scrolled]="scrolled() || menuOpen()">
+  <div class="header__inner">
+    <a href="#hero" class="header__logo" [attr.aria-label]="t.nav.home" (click)="goTo($event, 'hero')">
+      <app-logo-mark class="header__logo-icon" [size]="36" />
+      <span class="header__logo-text">Fix<span>Core</span></span>
+    </a>
+
+    <nav class="header__nav" [class.open]="menuOpen()" id="mainNav">
+      @for (link of t.nav.links; track link.id) {
+        <a [href]="'#' + link.id" (click)="goTo($event, link.id)">{{ link.label }}</a>
+      }
+      <div class="header__nav-actions">
+        <a [href]="loginUrl()" class="btn btn--secondary">{{ t.nav.login }}</a>
+        <a [href]="registerUrl()" class="btn btn--primary">{{ t.nav.demo }}</a>
+      </div>
+    </nav>
+
+    <div class="header__actions">
+      <app-lang-toggle />
+      <a [href]="loginUrl()" class="btn btn--ghost header__login">{{ t.nav.login }}</a>
+      <a [href]="registerUrl()" class="btn btn--primary header__demo">{{ t.nav.demo }}</a>
+
+      <button
+        type="button"
+        class="header__mobile-toggle"
+        [class.open]="menuOpen()"
+        [attr.aria-label]="menuOpen() ? t.nav.closeMenu : t.nav.openMenu"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mainNav"
+        (click)="toggleMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+@if (menuOpen()) {
+  <div class="header__backdrop" (click)="closeMenu()"></div>
+}
